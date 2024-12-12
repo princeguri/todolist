@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="todo.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div id="container">
+        <div id="todo">
+            <h1>To_Do List</h1>
+            <div id="inputbox">
+                <input type="text" id="firstinput" placeholder="add your text">
+                <button type="button" id="button">add</button>
+            </div>
+            <ul id="ullist"></ul>
+        </div>
+
+    </div>
+    <script>
+        document.getElementById('button').addEventListener('click', function () {
+            // alert('hello')
+            const input = document.getElementById('firstinput').value
+            if (input == '') {
+                alert('enter any text')
+            } else {
+                const li = document.createElement('li')
+                li.innerHTML = input
+                ullist.appendChild(li)
+                const span = document.createElement("span")
+                span.innerHTML = '\u00d7'
+                li.appendChild(span)
+                document.getElementById('firstinput').value="";
+            }
+            adddata()
+
+
+        })
+        document.getElementById('ullist').addEventListener('click', function (e) {
+            // alert('hello')
+            const nametag = e.target.tagName;
+            // console.log(nametag);
+            if (nametag == 'SPAN') {
+                e.target.parentNode.remove()
+            } else if (nametag == 'LI') {
+                e.target.classList.toggle('checked')
+                // li.classList.toggle('checked');
+            }
+            adddata()
+
+        })
+
+        function adddata() {
+            localStorage.setItem('dataTDL', ullist.innerHTML)
+
+        }
+        // adddata()
+
+        function getdata() {
+
+            ullist.innerHTML = localStorage.getItem('dataTDL')
+
+        }
+        getdata()
+    </script>
+</body>
+
+</html>
